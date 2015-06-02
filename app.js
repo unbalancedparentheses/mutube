@@ -9611,7 +9611,7 @@ System.register("build/main", ["npm:react@0.12.2"], true, function(require, expo
     handleSubmit: function(e) {
       e.preventDefault();
       var self = this;
-      var url = "https://www.googleapis.com/youtube/v3/search?" + "type=video" + "&enablejsapi=1" + "&part=snippet" + "&videoEmbeddable=true" + "&iv_load_policy=3" + "&maxResults=3" + "&q=" + this.state.q + "&key=AIzaSyCR5In4DZaTP6IEZQ0r1JceuvluJRzQNLE";
+      var url = "https://www.googleapis.com/youtube/v3/search?" + "type=video" + "&enablejsapi=1" + "&part=snippet" + "&videoEmbeddable=true" + "&iv_load_policy=3" + "&maxResults=50" + "&q=" + this.state.q + "&key=AIzaSyCR5In4DZaTP6IEZQ0r1JceuvluJRzQNLE";
       var req = new XMLHttpRequest();
       req.open('GET', url);
       req.onload = function(res) {
@@ -9619,7 +9619,7 @@ System.register("build/main", ["npm:react@0.12.2"], true, function(require, expo
         var videos = [];
         for (i = 0; i < jsonResponse["items"].length; i++) {
           var id = jsonResponse["items"][i]["id"]["videoId"];
-          var thumb = jsonResponse["items"][i]["snippet"]["thumbnails"]["medium"];
+          var thumb = jsonResponse["items"][i]["snippet"]["thumbnails"]["medium"]["url"];
           videos[i] = {
             "id": id,
             "thumb": thumb
@@ -9646,7 +9646,7 @@ System.register("build/main", ["npm:react@0.12.2"], true, function(require, expo
         id: "container",
         style: {height: "100%"}
       }, React.createElement("form", {
-        style: {height: "9%"},
+        style: {height: "10%"},
         onSubmit: this.handleSubmit
       }, React.createElement("input", {
         autoFocus: true,
@@ -9656,14 +9656,17 @@ System.register("build/main", ["npm:react@0.12.2"], true, function(require, expo
         id: "q",
         onChange: this.onChange,
         value: this.state.q
-      })), React.createElement(Player, {id: this.state.videoId})));
+      })), React.createElement(Player, {id: this.state.videoId}), React.createElement(Slider, {
+        videos: this.state.videos,
+        videoN: this.state.videoN
+      })));
     }
   });
   var Player = React.createClass({
     displayName: "Player",
     render: function() {
       return (React.createElement("div", {style: {
-          height: "90%",
+          height: "75%",
           width: "100%",
           boxSizing: "border-box"
         }}, React.createElement("iframe", {
@@ -9673,8 +9676,49 @@ System.register("build/main", ["npm:react@0.12.2"], true, function(require, expo
           boxSizing: "border-box"
         },
         src: "https://www.youtube.com/embed/" + this.props.id + "?autoplay=1",
-        frameborder: "0",
-        allowfullscreen: true
+        frameBorder: "0",
+        allowFullScreen: true
+      })));
+    }
+  });
+  var Slider = React.createClass({
+    displayName: "Slider",
+    render: function() {
+      var videoN = this.props.videoN;
+      var firstVideo = 5 * Math.floor(videoN / 5);
+      var styles = [];
+      for (i = firstVideo; i < firstVideo + 5; i++) {
+        var thumb;
+        if (this.props.videos[0]) {
+          thumb = this.props.videos[i].thumb;
+        } else {
+          thumb = '';
+        }
+        var style = {
+          backgroundSize: "cover",
+          backgroundImage: "url(" + thumb + ")",
+          height: "100%",
+          width: "20%",
+          float: "left"
+        };
+        if (i == videoN) {
+          style["boxShadow"] = "inset 0px 0px 0px 5px #f00";
+        } else {
+          style["-webkit-filter"] = "grayscale(100%)";
+        }
+        styles.push({
+          "id": i,
+          "data": style
+        });
+      }
+      return (React.createElement("div", {
+        style: {height: "15%"},
+        id: "slider"
+      }, styles.map(function(style) {
+        return React.createElement("div", {
+          key: style.id,
+          style: style.data
+        });
       })));
     }
   });
