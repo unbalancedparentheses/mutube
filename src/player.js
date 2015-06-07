@@ -3,7 +3,9 @@
 import React from "react";
 
 class Player extends React.Component {
-    constructor () {
+    constructor (props) {
+        super(props);
+
         let tag = document.createElement("script");
 
         tag.src = "https://www.youtube.com/iframe_api";

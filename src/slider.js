@@ -3,6 +3,10 @@
 import React from "react";
 
 class Slider extends React.Component{
+    handleClick(videoClickN) {
+        this.props.clickFunction(videoClickN);
+    }
+
     render () {
         let videoN = this.props.videoN;
 
@@ -41,10 +45,10 @@ class Slider extends React.Component{
         }
 
         return (
-                <div id="slider" style={{height: "15%"}}>
+                <div id="slider" tabIndex="0" style={{height: "15%"}}>
                 {
                     styles.map(s => {
-                        return <div key={s.id} style={s.data}/>;
+                        return <div key={s.id} onClick={this.handleClick.bind(this, s.id)} style={s.data}/>;
                     })
                 }
             </div>
