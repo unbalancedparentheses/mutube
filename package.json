@@ -1,0 +1,45 @@
+{
+  "name": "mutube",
+  "author": "Federico Carrone",
+  "jspm": {
+    "directories": {
+      "lib": "."
+    },
+    "dependencies": {
+      "react": "npm:react@0.13.3",
+      "react-router": "npm:react-router@0.13.3",
+      "whatwg-fetch": "npm:whatwg-fetch@0.9.0"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.1.13",
+      "babel-runtime": "npm:babel-runtime@^5.1.13",
+      "core-js": "npm:core-js@^0.9.4",
+      "traceur": "github:jmcriffey/bower-traceur@0.0.88",
+      "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88"
+    }
+  },
+  "devDependencies": {
+    "watch": "latest",
+    "browser-sync": "latest",
+    "eslint": "latest",
+    "babel-eslint": "latest",
+    "eslint-plugin-react": "latest",
+    "react-tools": "latest",
+    "parallelshell": "latest"
+  },
+  "scripts": {
+    "clean": "rm -rf build/* output/* && mkdir -p build/ && mkdir -p output",
+    "build:buildjsx": "jsx --es6module --harmony src/ build/",
+    "build:bundlejsx": "jspm bundle-sfx build/main output/app.js",
+    "build:jsx": "npm run build:buildjsx && npm run build:bundlejsx",
+    "watch:jsx": "watch 'npm run build:jsx' src/",
+    "build:html": "cp src/index.html output/index.html",
+    "watch:html": "watch 'npm run build:html' src/",
+    "watch": "parallelshell 'npm run watch:jsx' 'npm run watch:html'",
+    "dev": "npm run clean && parallelshell 'browser-sync start --server output/ --files src/*' 'npm run watch'",
+    "lint": "eslint -f compact src/"
+  },
+  "dependencies": {
+    "whatwg-fetch": "^0.9.0"
+  }
+}
