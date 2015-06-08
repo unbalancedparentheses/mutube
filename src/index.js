@@ -22,7 +22,6 @@ class Index extends React.Component {
         e.preventDefault();
 
         let newURL = window.location.href + "search/" + this.state.q;
-
         window.location = newURL;
     }
 
@@ -41,7 +40,10 @@ class Index extends React.Component {
                     height: "100%",
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "center"
+                    justifyContent: "center",
+                    background: "radial-gradient(circle, transparent 20%, slategray 20%, slategray 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, slategray 20%, slategray 80%, transparent 80%, transparent) 50px 50px, linear-gradient(#A8B1BB 8px, transparent 8px) 0 -4px, linear-gradient(90deg, #A8B1BB 8px, transparent 8px) -4px 0",
+                    backgroundColor: "slategray",
+                    backgroundSize: "100px 100px, 100px 100px, 50px 50px, 50px 50px"
                 }}>
 
                 <form
