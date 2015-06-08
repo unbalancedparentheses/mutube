@@ -21,7 +21,7 @@ class Index extends React.Component {
     handleSubmit (e) {
         e.preventDefault();
 
-        let newURL = window.location.protocol + "//" + window.location.host + "/#/search/" + this.state.q;
+        let newURL = window.location.href + "search/" + this.state.q;
 
         window.location = newURL;
     }
