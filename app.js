@@ -14246,16 +14246,18 @@ System.register("build/slider", ["npm:babel-runtime@5.4.7/core-js/object/create"
     };
 });
 System.register("build/player", ["npm:babel-runtime@5.4.7/core-js/object/create", "npm:babel-runtime@5.4.7/core-js/object/define-property", "npm:react@0.13.3"], function (_export) {
-    var _Object$create, _Object$defineProperty, React, ____Class3, ____Class3____Key, ____SuperProtoOf____Class3;
+    var _Object$create, _Object$defineProperty, React, ____Class0, ____Class0____Key, ____SuperProtoOf____Class0;
 
     function Player(props) {
-        ____Class3.call(this, props);
+        ____Class0.call(this, props);
 
         var tag = document.createElement("script");
 
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName("script")[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        this.loadPlayer = this.loadPlayer.bind(this);
     }
 
     return {
@@ -14269,27 +14271,36 @@ System.register("build/player", ["npm:babel-runtime@5.4.7/core-js/object/create"
         execute: function () {
             "use strict";
 
-            ____Class3 = React.Component;
-            for (____Class3____Key in ____Class3) {
-                if (____Class3.hasOwnProperty(____Class3____Key)) {
-                    Player[____Class3____Key] = ____Class3[____Class3____Key];
+            ____Class0 = React.Component;
+            for (____Class0____Key in ____Class0) {
+                if (____Class0.hasOwnProperty(____Class0____Key)) {
+                    Player[____Class0____Key] = ____Class0[____Class0____Key];
                 }
-            }____SuperProtoOf____Class3 = ____Class3 === null ? null : ____Class3.prototype;
-            Player.prototype = _Object$create(____SuperProtoOf____Class3);Player.prototype.constructor = Player;Player.__superConstructor__ = ____Class3;_Object$defineProperty(Player.prototype, "componentDidMount", { writable: true, configurable: true, value: function value() {
+            }____SuperProtoOf____Class0 = ____Class0 === null ? null : ____Class0.prototype;
+            Player.prototype = _Object$create(____SuperProtoOf____Class0);Player.prototype.constructor = Player;Player.__superConstructor__ = ____Class0;_Object$defineProperty(Player.prototype, "componentDidMount", { writable: true, configurable: true, value: function value() {
                     document.onPlayerReady = function (event) {
                         event.target.playVideo();
                     };
 
-                    window.onYouTubePlayerAPIReady = (function () {
-                        window.player = new YT.Player("player", {
-                            height: "100%",
-                            width: "100%",
-                            videoId: this.props.videoId,
-                            events: {
-                                "onReady": document.onPlayerReady
-                            }
-                        });
-                    }).bind(this);
+                    if (window.ytLoaded === true) {
+                        window.player = this.loadPlayer();
+                    } else {
+                        window.onYouTubePlayerAPIReady = (function () {
+                            window.player = this.loadPlayer();
+                            window.ytLoaded = true;
+                        }).bind(this);
+                    }
+                } });
+
+            _Object$defineProperty(Player.prototype, "loadPlayer", { writable: true, configurable: true, value: function value() {
+                    return new YT.Player("player", {
+                        height: "100%",
+                        width: "100%",
+                        videoId: this.props.videoId,
+                        events: {
+                            "onReady": document.onPlayerReady
+                        }
+                    });
                 } });
 
             _Object$defineProperty(Player.prototype, "componentWillUpdate", { writable: true, configurable: true, value: function value(nextProps) {
