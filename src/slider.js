@@ -3,12 +3,47 @@
 import React from "react";
 
 class Slider extends React.Component{
-    componentDidMount () {
-        window.slider.addEventListener("keydown", this.props.onKeyDown);
+
+    constructor(props) {
+        super(props);
+        this.onKeyDown = this.onKeyDown.bind(this);
+    }
+
+    onKeyDown (event) {
+        let key = event.which;
+        let leftArrow = 37;
+        let rightArrow = 39;
+        let escape = 27;
+
+        let videoN = this.props.videoN;
+        let lastVideo = this.props.videos.length - 1;
+
+        let newVideoN;
+
+        if (key === leftArrow) {
+            if (videoN === 0) {
+                newVideoN = lastVideo;
+            } else {
+                newVideoN = videoN - 1;
+            }
+            this.props.playVideo(newVideoN);
+        } else if (key === rightArrow) {
+            if (videoN === lastVideo) {
+                newVideoN = 0;
+            } else {
+                newVideoN = videoN + 1;
+            }
+            this.props.playVideo(newVideoN);
+        }
+
+        if (key === escape) {
+            event.preventDefault();
+            this.props.focusQ();
+        }
     }
 
     handleClick(videoClickN) {
-        this.props.clickFunction(videoClickN);
+        this.props.playVideo(videoClickN);
     }
 
     render () {
@@ -49,10 +84,16 @@ class Slider extends React.Component{
         }
 
         return (
-                <div id="slider" tabIndex="0" style={{height: "20%"}}>
+                <div
+            id="slider"
+            onKeyDown={this.onKeyDown}
+            style={{height: "20%"}}
+            tabIndex="0">
                 {
                     styles.map(s => {
-                        return <div key={s.id} onClick={this.handleClick.bind(this, s.id)} style={s.data}/>;
+                        return (<div key={s.id}
+                                onClick={this.handleClick.bind(this, s.id)}
+                                style={s.data}/>);
                     })
                 }
             </div>

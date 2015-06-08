@@ -1,5 +1,7 @@
 "use strict";
 
+import axios from "axios";
+
 class YoutubeApi {
     constructor() {
         this.url = "https://www.googleapis.com/youtube/v3/search?"
@@ -13,11 +15,11 @@ class YoutubeApi {
     }
 
     search(q) {
-        return fetch(this.url + "&q=" + q)
+        return axios.get(this.url + "&q=" + q)
             .then(res => {
-                return res.json();
-            }).then(json => {
-                let items = json.items;
+                return res.data;
+            }).then(data => {
+                let items = data.items;
 
                 let videos = items.map(i => {
                     return {

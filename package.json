@@ -6,9 +6,9 @@
       "lib": "."
     },
     "dependencies": {
+      "axios": "npm:axios@0.5.4",
       "react": "npm:react@0.13.3",
-      "react-router": "npm:react-router@0.13.3",
-      "whatwg-fetch": "npm:whatwg-fetch@0.9.0"
+      "react-router": "npm:react-router@0.13.3"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.1.13",
