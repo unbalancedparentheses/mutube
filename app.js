@@ -14097,7 +14097,6 @@ System.register("build/index", ["npm:babel-runtime@5.4.7/core-js/object/create",
                     e.preventDefault();
 
                     var newURL = window.location.href + "search/" + this.state.q;
-
                     window.location = newURL;
                 } });
 
@@ -14115,7 +14114,10 @@ System.register("build/index", ["npm:babel-runtime@5.4.7/core-js/object/create",
                             height: "100%",
                             display: "flex",
                             alignItems: "center",
-                            justifyContent: "center"
+                            justifyContent: "center",
+                            background: "radial-gradient(circle, transparent 20%, slategray 20%, slategray 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, slategray 20%, slategray 80%, transparent 80%, transparent) 50px 50px, linear-gradient(#A8B1BB 8px, transparent 8px) 0 -4px, linear-gradient(90deg, #A8B1BB 8px, transparent 8px) -4px 0",
+                            backgroundColor: "slategray",
+                            backgroundSize: "100px 100px, 100px 100px, 50px 50px, 50px 50px"
                         } }, React.createElement("form", {
                         onSubmit: this.handleSubmit,
                         style: { height: "10%", width: "100%" } }, React.createElement("input", {
