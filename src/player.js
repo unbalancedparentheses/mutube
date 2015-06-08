@@ -11,6 +11,8 @@ class Player extends React.Component {
         tag.src = "https://www.youtube.com/iframe_api";
         let firstScriptTag = document.getElementsByTagName("script")[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        this.loadPlayer = this.loadPlayer.bind(this);
     }
 
     componentDidMount () {
@@ -18,16 +20,25 @@ class Player extends React.Component {
             event.target.playVideo();
         };
 
-        window.onYouTubePlayerAPIReady = () => {
-            window.player = new YT.Player("player", {
-                height: "100%",
-                width: "100%",
-                videoId: this.props.videoId,
-                events: {
-                    "onReady": document.onPlayerReady
-                }
-            });
-        };
+        if (window.ytLoaded === true) {
+            window.player = this.loadPlayer();
+        } else {
+            window.onYouTubePlayerAPIReady = () => {
+                window.player = this.loadPlayer();
+                window.ytLoaded = true;
+            };
+        }
+    }
+
+    loadPlayer() {
+        return new YT.Player("player", {
+            height: "100%",
+            width: "100%",
+            videoId: this.props.videoId,
+            events: {
+                "onReady": document.onPlayerReady
+            }
+        });
     }
 
     componentWillUpdate(nextProps) {
