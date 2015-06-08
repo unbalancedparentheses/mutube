@@ -14096,7 +14096,7 @@ System.register("build/index", ["npm:babel-runtime@5.4.7/core-js/object/create",
             _Object$defineProperty(Index.prototype, "handleSubmit", { writable: true, configurable: true, value: function value(e) {
                     e.preventDefault();
 
-                    var newURL = window.location.protocol + "//" + window.location.host + "/#/search/" + this.state.q;
+                    var newURL = window.location.href + "search/" + this.state.q;
 
                     window.location = newURL;
                 } });
@@ -14132,10 +14132,10 @@ System.register("build/index", ["npm:babel-runtime@5.4.7/core-js/object/create",
     };
 });
 System.register("build/slider", ["npm:babel-runtime@5.4.7/core-js/object/create", "npm:babel-runtime@5.4.7/core-js/object/define-property", "npm:react@0.13.3"], function (_export) {
-    var _Object$create, _Object$defineProperty, React, ____Class0, ____Class0____Key, ____SuperProtoOf____Class0;
+    var _Object$create, _Object$defineProperty, React, ____Class4, ____Class4____Key, ____SuperProtoOf____Class4;
 
     function Slider(props) {
-        ____Class0.call(this, props);
+        ____Class4.call(this, props);
         this.onKeyDown = this.onKeyDown.bind(this);
     }
 
@@ -14150,13 +14150,13 @@ System.register("build/slider", ["npm:babel-runtime@5.4.7/core-js/object/create"
         execute: function () {
             "use strict";
 
-            ____Class0 = React.Component;
-            for (____Class0____Key in ____Class0) {
-                if (____Class0.hasOwnProperty(____Class0____Key)) {
-                    Slider[____Class0____Key] = ____Class0[____Class0____Key];
+            ____Class4 = React.Component;
+            for (____Class4____Key in ____Class4) {
+                if (____Class4.hasOwnProperty(____Class4____Key)) {
+                    Slider[____Class4____Key] = ____Class4[____Class4____Key];
                 }
-            }____SuperProtoOf____Class0 = ____Class0 === null ? null : ____Class0.prototype;
-            Slider.prototype = _Object$create(____SuperProtoOf____Class0);Slider.prototype.constructor = Slider;Slider.__superConstructor__ = ____Class0;_Object$defineProperty(Slider.prototype, "onKeyDown", { writable: true, configurable: true, value: function value(event) {
+            }____SuperProtoOf____Class4 = ____Class4 === null ? null : ____Class4.prototype;
+            Slider.prototype = _Object$create(____SuperProtoOf____Class4);Slider.prototype.constructor = Slider;Slider.__superConstructor__ = ____Class4;_Object$defineProperty(Slider.prototype, "onKeyDown", { writable: true, configurable: true, value: function value(event) {
                     var key = event.which;
                     var leftArrow = 37;
                     var rightArrow = 39;
@@ -14246,10 +14246,10 @@ System.register("build/slider", ["npm:babel-runtime@5.4.7/core-js/object/create"
     };
 });
 System.register("build/player", ["npm:babel-runtime@5.4.7/core-js/object/create", "npm:babel-runtime@5.4.7/core-js/object/define-property", "npm:react@0.13.3"], function (_export) {
-    var _Object$create, _Object$defineProperty, React, ____Class0, ____Class0____Key, ____SuperProtoOf____Class0;
+    var _Object$create, _Object$defineProperty, React, ____Class3, ____Class3____Key, ____SuperProtoOf____Class3;
 
     function Player(props) {
-        ____Class0.call(this, props);
+        ____Class3.call(this, props);
 
         var tag = document.createElement("script");
 
@@ -14269,13 +14269,13 @@ System.register("build/player", ["npm:babel-runtime@5.4.7/core-js/object/create"
         execute: function () {
             "use strict";
 
-            ____Class0 = React.Component;
-            for (____Class0____Key in ____Class0) {
-                if (____Class0.hasOwnProperty(____Class0____Key)) {
-                    Player[____Class0____Key] = ____Class0[____Class0____Key];
+            ____Class3 = React.Component;
+            for (____Class3____Key in ____Class3) {
+                if (____Class3.hasOwnProperty(____Class3____Key)) {
+                    Player[____Class3____Key] = ____Class3[____Class3____Key];
                 }
-            }____SuperProtoOf____Class0 = ____Class0 === null ? null : ____Class0.prototype;
-            Player.prototype = _Object$create(____SuperProtoOf____Class0);Player.prototype.constructor = Player;Player.__superConstructor__ = ____Class0;_Object$defineProperty(Player.prototype, "componentDidMount", { writable: true, configurable: true, value: function value() {
+            }____SuperProtoOf____Class3 = ____Class3 === null ? null : ____Class3.prototype;
+            Player.prototype = _Object$create(____SuperProtoOf____Class3);Player.prototype.constructor = Player;Player.__superConstructor__ = ____Class3;_Object$defineProperty(Player.prototype, "componentDidMount", { writable: true, configurable: true, value: function value() {
                     document.onPlayerReady = function (event) {
                         event.target.playVideo();
                     };
@@ -14285,8 +14285,6 @@ System.register("build/player", ["npm:babel-runtime@5.4.7/core-js/object/create"
                             height: "100%",
                             width: "100%",
                             videoId: this.props.videoId,
-                            disablekb: 0,
-                            modestbranding: 1,
                             events: {
                                 "onReady": document.onPlayerReady
                             }
@@ -14350,10 +14348,10 @@ System.register("build/youtube-api", ["npm:babel-runtime@5.4.7/core-js/object/de
     };
 });
 System.register("build/mutube", ["npm:babel-runtime@5.4.7/core-js/object/create", "npm:babel-runtime@5.4.7/core-js/object/define-property", "npm:react@0.13.3", "build/slider", "build/player", "build/youtube-api"], function (_export) {
-    var _Object$create, _Object$defineProperty, React, Slider, Player, Youtube, ____Class0, ____Class0____Key, ____SuperProtoOf____Class0;
+    var _Object$create, _Object$defineProperty, React, Slider, Player, Youtube, ____Class2, ____Class2____Key, ____SuperProtoOf____Class2;
 
     function MuTube(props, context) {
-        ____Class0.call(this, props);
+        ____Class2.call(this, props);
 
         this.onChange = this.onChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -14392,13 +14390,13 @@ System.register("build/mutube", ["npm:babel-runtime@5.4.7/core-js/object/create"
         execute: function () {
             "use strict";
 
-            ____Class0 = React.Component;
-            for (____Class0____Key in ____Class0) {
-                if (____Class0.hasOwnProperty(____Class0____Key)) {
-                    MuTube[____Class0____Key] = ____Class0[____Class0____Key];
+            ____Class2 = React.Component;
+            for (____Class2____Key in ____Class2) {
+                if (____Class2.hasOwnProperty(____Class2____Key)) {
+                    MuTube[____Class2____Key] = ____Class2[____Class2____Key];
                 }
-            }____SuperProtoOf____Class0 = ____Class0 === null ? null : ____Class0.prototype;
-            MuTube.prototype = _Object$create(____SuperProtoOf____Class0);MuTube.prototype.constructor = MuTube;MuTube.__superConstructor__ = ____Class0;_Object$defineProperty(MuTube.prototype, "onKeyDown", { writable: true, configurable: true, value: function value(event) {
+            }____SuperProtoOf____Class2 = ____Class2 === null ? null : ____Class2.prototype;
+            MuTube.prototype = _Object$create(____SuperProtoOf____Class2);MuTube.prototype.constructor = MuTube;MuTube.__superConstructor__ = ____Class2;_Object$defineProperty(MuTube.prototype, "onKeyDown", { writable: true, configurable: true, value: function value(event) {
                     var key = event.which;
                     var escape = 27;
 
@@ -14495,11 +14493,11 @@ System.register("build/mutube", ["npm:babel-runtime@5.4.7/core-js/object/create"
     };
 });
 System.register("build/main", ["npm:babel-runtime@5.4.7/core-js/object/create", "npm:babel-runtime@5.4.7/core-js/object/define-property", "npm:react@0.13.3", "npm:react-router@0.13.3", "build/index", "build/mutube"], function (_export) {
-    var _Object$create, _Object$defineProperty, React, Router, Index, MuTube, DefaultRoute, Link, Route, RouteHandler, ____Class0, ____Class0____Key, ____SuperProtoOf____Class0, routes;
+    var _Object$create, _Object$defineProperty, React, Router, Index, MuTube, DefaultRoute, Link, Route, RouteHandler, ____Class1, ____Class1____Key, ____SuperProtoOf____Class1, routes;
 
     function App() {
-        if (____Class0 !== null) {
-            ____Class0.apply(this, arguments);
+        if (____Class1 !== null) {
+            ____Class1.apply(this, arguments);
         }
     }
     return {
@@ -14523,13 +14521,13 @@ System.register("build/main", ["npm:babel-runtime@5.4.7/core-js/object/create", 
             Link = Router.Link;
             Route = Router.Route;
             RouteHandler = Router.RouteHandler;
-            ____Class0 = React.Component;
-            for (____Class0____Key in ____Class0) {
-                if (____Class0.hasOwnProperty(____Class0____Key)) {
-                    App[____Class0____Key] = ____Class0[____Class0____Key];
+            ____Class1 = React.Component;
+            for (____Class1____Key in ____Class1) {
+                if (____Class1.hasOwnProperty(____Class1____Key)) {
+                    App[____Class1____Key] = ____Class1[____Class1____Key];
                 }
-            }____SuperProtoOf____Class0 = ____Class0 === null ? null : ____Class0.prototype;
-            App.prototype = _Object$create(____SuperProtoOf____Class0);App.prototype.constructor = App;App.__superConstructor__ = ____Class0;_Object$defineProperty(App.prototype, "render", { writable: true, configurable: true, value: function value() {
+            }____SuperProtoOf____Class1 = ____Class1 === null ? null : ____Class1.prototype;
+            App.prototype = _Object$create(____SuperProtoOf____Class1);App.prototype.constructor = App;App.__superConstructor__ = ____Class1;_Object$defineProperty(App.prototype, "render", { writable: true, configurable: true, value: function value() {
                     return React.createElement("div", { style: {
                             height: "100%",
                             width: "100%"
