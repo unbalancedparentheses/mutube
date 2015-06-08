@@ -36,13 +36,13 @@ class Player extends React.Component {
         }
     }
 
-    shouldComponentUpdate (nextProps, nextState) {
+    shouldComponentUpdate (nextProps) {
         return nextProps.videoId !== this.props.videoId;
     }
 
     render() {
         return (
-                <div style={{height: "75%", width: "100%", boxSizing: "border-box"}}>
+                <div style={{height: "80%", width: "100%", boxSizing: "border-box"}}>
 
                 <div id="player"/>
 

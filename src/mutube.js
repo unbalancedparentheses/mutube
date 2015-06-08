@@ -18,15 +18,18 @@ class MuTube extends React.Component {
             q: q,
             videos: [],
             videoN: 0,
-            videoId: ""
+            videoId: "",
+            searching: true
         };
 
         Youtube.search(this.state.q).then(videos => {
             this.setState({
                 videos: videos,
                 videoN: 0,
-                videoId: videos[0].id
+                videoId: videos[0].id,
+                searching: false
             });
+            React.findDOMNode(this.refs.slider).focus();
         });
 
         this.onChange = this.onChange.bind(this);
@@ -35,14 +38,11 @@ class MuTube extends React.Component {
         this.playVideoN = this.playVideoN.bind(this);
     }
 
-    componentDidMount () {
-        window.slider.addEventListener("keydown", this.onKeyDown);
-    }
-
     onKeyDown (event) {
         let key = event.which;
         let leftArrow = 37;
         let rightArrow = 39;
+        let escape = 27;
 
         let videoN = this.state.videoN;
         let lastVideo = this.state.videos.length - 1;
@@ -78,6 +78,11 @@ class MuTube extends React.Component {
                 videoId: newVideoId
             });
         }
+
+        if (key === escape) {
+            event.preventDefault();
+            React.findDOMNode(this.refs.q).focus();
+        }
     }
 
     onChange (e) {
@@ -93,10 +98,8 @@ class MuTube extends React.Component {
                 videoN: 0,
                 videoId: videos[0].id
             });
+            React.findDOMNode(this.refs.slider).focus();
         });
-
-        React.findDOMNode(this.refs.slider).focus();
-
     }
 
     playVideoN(videoClickN) {
@@ -115,6 +118,29 @@ class MuTube extends React.Component {
             textAlign: "center"
         };
 
+        let videoAndSlider;
+        if (this.state.searching) {
+            videoAndSlider =
+                <div
+            style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "100%",
+                fontSize: "2em"
+            }}
+                >
+                Searching
+            </div>;
+        } else {
+            videoAndSlider = <div style={{height: "100%", width: "100%"}}>
+                <Player videoId={this.state.videoId}/>
+                <Slider onKeyDown={this.onKeyDown} clickFunction={this.playVideoN} ref="slider" videoN={this.state.videoN} videos={this.state.videos}/>
+                </div>;
+        }
+
+
+
         return (
                 <div id="container" style={{height: "100%"}}>
 
@@ -128,13 +154,15 @@ class MuTube extends React.Component {
             id="q"
             onChange={this.onChange}
             placeholder="search"
+            ref="q"
             style={inputStyle}
             value={this.state.q}
                 />
                 </form>
 
-                <Player videoId={this.state.videoId}/>
-                <Slider clickFunction={this.playVideoN} ref="slider" videoN={this.state.videoN} videos={this.state.videos}/>
+                <div style={{height: "90%"}}>
+                {{videoAndSlider}}
+            </div>
 
                 </div>
         );
