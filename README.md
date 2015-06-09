@@ -1,2 +1,2 @@
 # mutube
-Mini YouTube
+Micro YouTube
