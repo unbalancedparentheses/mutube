@@ -2,11 +2,19 @@
 <html style="height: 100%; width: 100%; margin: 0;">
     <head>
 
-        <script src="app.js" defer></script>
+        <script src="jspm_packages/system.js"></script>
+        <script src="config.js"></script>
+        <script>
+            System.import('./build/main');
+        </script>
 
+        <!-- <script src="app.js" defer></script> -->
+
+
+        <link rel="shortcut icon" href="./favicon.ico">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
-        <title>muTube</title>
+        <title>μTube</title>
 
         <style type="text/css">
             html, body {height: 100%; width: 100%; margin: 0;}
