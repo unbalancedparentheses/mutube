@@ -28,10 +28,11 @@
   "scripts": {
     "clean": "rm -rf build/* output/* && mkdir -p build/ && mkdir -p output",
     "build:jsx": "jsx --es6module --harmony src/ build/",
-    "watch:jsx": "watch 'npm run build:jsx' src/",
+    "watch:jsx": "watch --wait=2 'npm run build:jsx' src/",
     "build:html": "cp index.html output/index.html",
     "bundle:jsx": "jspm bundle-sfx build/main output/app.js",
     "dev": "npm run clean && parallelshell 'live-server .' 'npm run watch:jsx'",
+    "prod": "npm run build:jsx && npm run bundle:jsx && npm run build:html",
     "lint": "eslint -f compact src/"
   }
 }
