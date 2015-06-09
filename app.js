@@ -14134,11 +14134,20 @@ System.register("build/index", ["npm:babel-runtime@5.4.7/core-js/object/create",
     };
 });
 System.register("build/slider", ["npm:babel-runtime@5.4.7/core-js/object/create", "npm:babel-runtime@5.4.7/core-js/object/define-property", "npm:react@0.13.3"], function (_export) {
-    var _Object$create, _Object$defineProperty, React, ____Class4, ____Class4____Key, ____SuperProtoOf____Class4;
+    var _Object$create, _Object$defineProperty, React, ____Class1, ____Class1____Key, ____SuperProtoOf____Class1;
 
     function Slider(props) {
-        ____Class4.call(this, props);
+        ____Class1.call(this, props);
+
+        this.state = {
+            width: 0
+        };
+
         this.onKeyDown = this.onKeyDown.bind(this);
+        this.updateDimensions = this.updateDimensions.bind(this);
+        this.componentWillMount = this.componentWillMount.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
+        this.componentWillUnmount = this.componentWillUnmount.bind(this);
     }
 
     return {
@@ -14152,13 +14161,13 @@ System.register("build/slider", ["npm:babel-runtime@5.4.7/core-js/object/create"
         execute: function () {
             "use strict";
 
-            ____Class4 = React.Component;
-            for (____Class4____Key in ____Class4) {
-                if (____Class4.hasOwnProperty(____Class4____Key)) {
-                    Slider[____Class4____Key] = ____Class4[____Class4____Key];
+            ____Class1 = React.Component;
+            for (____Class1____Key in ____Class1) {
+                if (____Class1.hasOwnProperty(____Class1____Key)) {
+                    Slider[____Class1____Key] = ____Class1[____Class1____Key];
                 }
-            }____SuperProtoOf____Class4 = ____Class4 === null ? null : ____Class4.prototype;
-            Slider.prototype = _Object$create(____SuperProtoOf____Class4);Slider.prototype.constructor = Slider;Slider.__superConstructor__ = ____Class4;_Object$defineProperty(Slider.prototype, "onKeyDown", { writable: true, configurable: true, value: function value(event) {
+            }____SuperProtoOf____Class1 = ____Class1 === null ? null : ____Class1.prototype;
+            Slider.prototype = _Object$create(____SuperProtoOf____Class1);Slider.prototype.constructor = Slider;Slider.__superConstructor__ = ____Class1;_Object$defineProperty(Slider.prototype, "onKeyDown", { writable: true, configurable: true, value: function value(event) {
                     var key = event.which;
                     var leftArrow = 37;
                     var rightArrow = 39;
@@ -14195,15 +14204,41 @@ System.register("build/slider", ["npm:babel-runtime@5.4.7/core-js/object/create"
                     this.props.playVideo(videoClickN);
                 } });
 
+            _Object$defineProperty(Slider.prototype, "updateDimensions", { writable: true, configurable: true, value: function value() {
+                    this.setState({ width: window.innerWidth });
+                } });
+
+            _Object$defineProperty(Slider.prototype, "componentWillMount", { writable: true, configurable: true, value: function value() {
+                    this.updateDimensions();
+                } });
+
+            _Object$defineProperty(Slider.prototype, "componentDidMount", { writable: true, configurable: true, value: function value() {
+                    window.addEventListener("resize", this.updateDimensions);
+                } });
+
+            _Object$defineProperty(Slider.prototype, "componentWillUnmount", { writable: true, configurable: true, value: function value() {
+                    window.removeEventListener("resize", this.updateDimensions);
+                } });
+
             _Object$defineProperty(Slider.prototype, "render", { writable: true, configurable: true, value: function value() {
+                    var numberOfVideos = undefined;
+
+                    if (this.state.width < 640) {
+                        numberOfVideos = 2;
+                    } else if (this.state.width < 1024) {
+                        numberOfVideos = 3;
+                    } else {
+                        numberOfVideos = 5;
+                    }
+
                     var videoN = this.props.videoN;
 
-                    var firstVideo = 5 * Math.floor(videoN / 5);
+                    var firstVideo = numberOfVideos * Math.floor(videoN / numberOfVideos);
 
                     var styles = [];
                     var i = undefined;
 
-                    for (i = firstVideo; i < firstVideo + 5; i++) {
+                    for (i = firstVideo; i < firstVideo + numberOfVideos; i++) {
                         var thumb = undefined;
 
                         if (this.props.videos[0]) {
@@ -14216,7 +14251,7 @@ System.register("build/slider", ["npm:babel-runtime@5.4.7/core-js/object/create"
                             backgroundSize: "cover",
                             backgroundImage: "url(" + thumb + ")",
                             height: "100%",
-                            width: "20%",
+                            width: "calc(100% / " + numberOfVideos + ")",
                             float: "left"
                         };
 
