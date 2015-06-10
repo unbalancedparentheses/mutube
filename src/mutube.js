@@ -82,15 +82,14 @@ class MuTube extends React.Component {
         if (this.state.searching) {
             videoAndSlider =
                 (<div
-            style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "100%",
-                fontSize: "2em"
-            }}
-                >
-                 Loading...
+                 style={{
+                     display: "flex",
+                     alignItems: "center",
+                     justifyContent: "center",
+                     height: "100%",
+                     fontSize: "2em"
+                 }}>
+                 <div className="spinner-loader"></div>
                  </div>);
         } else {
             videoAndSlider = (
