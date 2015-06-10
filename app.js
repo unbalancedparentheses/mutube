@@ -14415,7 +14415,8 @@ System.register("build/mutube", ["npm:babel-runtime@5.4.7/core-js/object/create"
             videos: [],
             videoN: 0,
             videoId: "",
-            searching: true
+            searching: true,
+            enoughResults: false
         };
 
         this.searchYoutube();
@@ -14470,13 +14471,22 @@ System.register("build/mutube", ["npm:babel-runtime@5.4.7/core-js/object/create"
 
             _Object$defineProperty(MuTube.prototype, "searchYoutube", { writable: true, configurable: true, value: function value() {
                     Youtube.search(this.state.q).then((function (videos) {
-                        this.setState({
-                            videos: videos,
-                            videoN: 0,
-                            videoId: videos[0].id,
-                            searching: false
-                        });
-                        React.findDOMNode(this.refs.slider).focus();
+                        if (videos.length < 5) {
+                            this.setState({
+                                searching: false,
+                                enoughResults: false
+                            });
+                        } else {
+                            this.setState({
+                                videos: videos,
+                                videoN: 0,
+                                videoId: videos[0].id,
+                                searching: false,
+                                enoughResults: true
+                            });
+
+                            React.findDOMNode(this.refs.slider).focus();
+                        }
                     }).bind(this));
                 } });
 
@@ -14491,44 +14501,30 @@ System.register("build/mutube", ["npm:babel-runtime@5.4.7/core-js/object/create"
                     var videoAndSlider = undefined;
 
                     if (this.state.searching) {
-                        videoAndSlider = React.createElement("div", {
-                            style: {
-                                display: "flex",
+                        videoAndSlider = React.createElement("div", { style: { display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
                                 height: "100%",
-                                fontSize: "2em"
-                            } }, React.createElement("div", { className: "spinner-loader" }));
+                                fontSize: "2em" } }, React.createElement("div", { className: "spinner-loader" }));
+                    } else if (!this.state.searching && !this.state.enoughResults) {
+                        videoAndSlider = React.createElement("div", { style: { display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                height: "100%",
+                                fontSize: "2em" } }, "No results found");
                     } else {
-                        videoAndSlider = React.createElement("div", { style: { height: "100%", width: "100%" } }, React.createElement(Player, { videoId: this.state.videoId }), React.createElement(Slider, {
-                            focusQ: this.focusQ,
-                            playVideo: this.playVideo,
-                            ref: "slider",
-                            videoN: this.state.videoN,
-                            videos: this.state.videos }));
+                        videoAndSlider = React.createElement("div", { style: { height: "100%", width: "100%" } }, React.createElement(Player, { videoId: this.state.videoId }), React.createElement(Slider, { focusQ: this.focusQ, playVideo: this.playVideo, ref: "slider",
+                            videoN: this.state.videoN, videos: this.state.videos }));
                     }
 
-                    var inputStyle = {
-                        boxSizing: "border-box",
-                        width: "100%",
-                        height: "100%",
-                        fontSize: "2em",
-                        textAlign: "center"
-                    };
-
-                    return React.createElement("div", { id: "container", style: { height: "100%" } }, React.createElement("form", {
-                        onSubmit: this.handleSubmit,
-                        style: { height: "10%" }
-                    }, React.createElement("input", {
-                        autoComplete: "off",
-                        autoFocus: true,
-                        id: "q",
-                        onChange: this.onChange,
-                        onKeyDown: this.onKeyDown,
-                        placeholder: "search",
-                        ref: "q",
-                        style: inputStyle,
-                        value: this.state.q })), React.createElement("div", { style: { height: "90%" } }, { videoAndSlider: videoAndSlider }));
+                    return React.createElement("div", { id: "container", style: { height: "100%" } }, React.createElement("form", { onSubmit: this.handleSubmit, style: { height: "10%" } }, React.createElement("input", { autoComplete: "off", autoFocus: true, id: "q", onChange: this.onChange,
+                        onKeyDown: this.onKeyDown, placeholder: "search", ref: "q",
+                        style: { boxSizing: "border-box",
+                            width: "100%",
+                            height: "100%",
+                            fontSize: "2em",
+                            textAlign: "center" },
+                        value: this.state.q })), React.createElement("div", { style: { height: "90%" } }, " ", { videoAndSlider: videoAndSlider }, " "));
                 } });
 
             MuTube.contextTypes = {
