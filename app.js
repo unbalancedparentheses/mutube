@@ -14134,10 +14134,10 @@ System.register("build/index", ["npm:babel-runtime@5.4.7/core-js/object/create",
     };
 });
 System.register("build/slider", ["npm:babel-runtime@5.4.7/core-js/object/create", "npm:babel-runtime@5.4.7/core-js/object/define-property", "npm:react@0.13.3"], function (_export) {
-    var _Object$create, _Object$defineProperty, React, ____Class1, ____Class1____Key, ____SuperProtoOf____Class1;
+    var _Object$create, _Object$defineProperty, React, ____Class0, ____Class0____Key, ____SuperProtoOf____Class0;
 
     function Slider(props) {
-        ____Class1.call(this, props);
+        ____Class0.call(this, props);
 
         this.state = {
             width: 0
@@ -14161,13 +14161,13 @@ System.register("build/slider", ["npm:babel-runtime@5.4.7/core-js/object/create"
         execute: function () {
             "use strict";
 
-            ____Class1 = React.Component;
-            for (____Class1____Key in ____Class1) {
-                if (____Class1.hasOwnProperty(____Class1____Key)) {
-                    Slider[____Class1____Key] = ____Class1[____Class1____Key];
+            ____Class0 = React.Component;
+            for (____Class0____Key in ____Class0) {
+                if (____Class0.hasOwnProperty(____Class0____Key)) {
+                    Slider[____Class0____Key] = ____Class0[____Class0____Key];
                 }
-            }____SuperProtoOf____Class1 = ____Class1 === null ? null : ____Class1.prototype;
-            Slider.prototype = _Object$create(____SuperProtoOf____Class1);Slider.prototype.constructor = Slider;Slider.__superConstructor__ = ____Class1;_Object$defineProperty(Slider.prototype, "onKeyDown", { writable: true, configurable: true, value: function value(event) {
+            }____SuperProtoOf____Class0 = ____Class0 === null ? null : ____Class0.prototype;
+            Slider.prototype = _Object$create(____SuperProtoOf____Class0);Slider.prototype.constructor = Slider;Slider.__superConstructor__ = ____Class0;_Object$defineProperty(Slider.prototype, "onKeyDown", { writable: true, configurable: true, value: function value(event) {
                     var key = event.which;
                     var leftArrow = 37;
                     var rightArrow = 39;
@@ -14238,7 +14238,7 @@ System.register("build/slider", ["npm:babel-runtime@5.4.7/core-js/object/create"
                     var styles = [];
                     var i = undefined;
 
-                    for (i = firstVideo; i < firstVideo + numberOfVideos; i++) {
+                    for (i = firstVideo; i < firstVideo + numberOfVideos && i < this.props.videos.length; i++) {
                         var thumb = undefined;
 
                         if (this.props.videos[0]) {
