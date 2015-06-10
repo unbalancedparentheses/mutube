@@ -19,11 +19,9 @@
   "devDependencies": {
     "watch": "latest",
     "live-server": "latest",
-    "eslint": "latest",
-    "babel-eslint": "latest",
-    "eslint-plugin-react": "latest",
     "react-tools": "latest",
-    "parallelshell": "latest"
+    "parallelshell": "latest",
+    "standard": "latest"
   },
   "scripts": {
     "clean": "rm -rf build/* output/* && mkdir -p build/ && mkdir -p output",
@@ -33,6 +31,6 @@
     "bundle:jsx": "jspm bundle-sfx build/main output/app.js",
     "dev": "npm run clean && parallelshell 'live-server .' 'npm run watch:jsx'",
     "prod": "npm run build:jsx && npm run bundle:jsx && npm run build:html",
-    "lint": "eslint -f compact src/"
+    "lint": "standard src/*"
   }
 }
