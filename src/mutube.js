@@ -58,6 +58,8 @@ class MuTube extends React.Component {
     }
 
     searchYoutube () {
+        this.setState({searching: true});
+
         Youtube.search(this.state.q).then(videos => {
             if (videos.length < 5) {
                 this.setState({
