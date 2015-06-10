@@ -14396,10 +14396,10 @@ System.register("build/youtube-api", ["npm:babel-runtime@5.4.7/core-js/object/de
     };
 });
 System.register("build/mutube", ["npm:babel-runtime@5.4.7/core-js/object/create", "npm:babel-runtime@5.4.7/core-js/object/define-property", "npm:react@0.13.3", "build/slider", "build/player", "build/youtube-api"], function (_export) {
-    var _Object$create, _Object$defineProperty, React, Slider, Player, Youtube, ____Class2, ____Class2____Key, ____SuperProtoOf____Class2;
+    var _Object$create, _Object$defineProperty, React, Slider, Player, Youtube, ____Class0, ____Class0____Key, ____SuperProtoOf____Class0;
 
     function MuTube(props, context) {
-        ____Class2.call(this, props);
+        ____Class0.call(this, props);
 
         this.onChange = this.onChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -14438,13 +14438,13 @@ System.register("build/mutube", ["npm:babel-runtime@5.4.7/core-js/object/create"
         execute: function () {
             "use strict";
 
-            ____Class2 = React.Component;
-            for (____Class2____Key in ____Class2) {
-                if (____Class2.hasOwnProperty(____Class2____Key)) {
-                    MuTube[____Class2____Key] = ____Class2[____Class2____Key];
+            ____Class0 = React.Component;
+            for (____Class0____Key in ____Class0) {
+                if (____Class0.hasOwnProperty(____Class0____Key)) {
+                    MuTube[____Class0____Key] = ____Class0[____Class0____Key];
                 }
-            }____SuperProtoOf____Class2 = ____Class2 === null ? null : ____Class2.prototype;
-            MuTube.prototype = _Object$create(____SuperProtoOf____Class2);MuTube.prototype.constructor = MuTube;MuTube.__superConstructor__ = ____Class2;_Object$defineProperty(MuTube.prototype, "onKeyDown", { writable: true, configurable: true, value: function value(event) {
+            }____SuperProtoOf____Class0 = ____Class0 === null ? null : ____Class0.prototype;
+            MuTube.prototype = _Object$create(____SuperProtoOf____Class0);MuTube.prototype.constructor = MuTube;MuTube.__superConstructor__ = ____Class0;_Object$defineProperty(MuTube.prototype, "onKeyDown", { writable: true, configurable: true, value: function value(event) {
                     var key = event.which;
                     var escape = 27;
 
@@ -14498,8 +14498,7 @@ System.register("build/mutube", ["npm:babel-runtime@5.4.7/core-js/object/create"
                                 justifyContent: "center",
                                 height: "100%",
                                 fontSize: "2em"
-                            }
-                        }, "Loading...");
+                            } }, React.createElement("div", { className: "spinner-loader" }));
                     } else {
                         videoAndSlider = React.createElement("div", { style: { height: "100%", width: "100%" } }, React.createElement(Player, { videoId: this.state.videoId }), React.createElement(Slider, {
                             focusQ: this.focusQ,
