@@ -14231,20 +14231,18 @@ System.register("build/slider", ["npm:babel-runtime@5.4.7/core-js/object/create"
                         numberOfVideos = 5;
                     }
 
-                    var videoN = this.props.videoN;
-
-                    var firstVideo = numberOfVideos * Math.floor(videoN / numberOfVideos);
+                    var firstVideo = numberOfVideos * Math.floor(this.props.videoN / numberOfVideos);
 
                     var styles = [];
                     var i = undefined;
 
-                    for (i = firstVideo; i < firstVideo + numberOfVideos && i < this.props.videos.length; i++) {
+                    for (i = firstVideo; i < firstVideo + numberOfVideos; i++) {
                         var thumb = undefined;
 
-                        if (this.props.videos[0]) {
+                        if (i < this.props.videos.length) {
                             thumb = this.props.videos[i].thumb;
                         } else {
-                            thumb = "";
+                            thumb = this.props.videos[i - this.props.videos.length].thumb;
                         }
 
                         var style = {
@@ -14255,7 +14253,7 @@ System.register("build/slider", ["npm:babel-runtime@5.4.7/core-js/object/create"
                             float: "left"
                         };
 
-                        if (i === videoN) {
+                        if (i === this.props.videoN) {
                             style.boxShadow = "inset 0px 0px 0px 5px #f00";
                         } else {
                             style.WebkitFilter = "grayscale(100%)";
