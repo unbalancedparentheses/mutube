@@ -26,11 +26,11 @@ class MuTube extends React.Component {
             videos: [],
             videoN: 0,
             videoId: "",
-            searching: true
+            searching: true,
+            enoughResults: false
         };
 
         this.searchYoutube();
-
     }
 
     onKeyDown (event) {
@@ -59,14 +59,23 @@ class MuTube extends React.Component {
 
     searchYoutube () {
         Youtube.search(this.state.q).then(videos => {
-           this.setState({
-                videos: videos,
-                videoN: 0,
-               videoId: videos[0].id,
-               searching: false
-            });
-           React.findDOMNode(this.refs.slider).focus();
-       });
+            if (videos.length < 5) {
+                this.setState({
+                    searching: false,
+                    enoughResults: false
+                });
+            } else {
+                this.setState({
+                    videos: videos,
+                    videoN: 0,
+                    videoId: videos[0].id,
+                    searching: false,
+                    enoughResults: true
+                });
+
+                React.findDOMNode(this.refs.slider).focus();
+            }
+        });
     }
 
     playVideo(videoN) {
@@ -81,62 +90,47 @@ class MuTube extends React.Component {
 
         if (this.state.searching) {
             videoAndSlider =
-                (<div
-                 style={{
-                     display: "flex",
-                     alignItems: "center",
-                     justifyContent: "center",
-                     height: "100%",
-                     fontSize: "2em"
-                 }}>
+                (<div style={{display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              height: "100%",
+                              fontSize: "2em"}}>
                  <div className="spinner-loader"></div>
                  </div>);
+        } else if (!this.state.searching && !this.state.enoughResults) {
+            videoAndSlider = (<div style={{display: "flex",
+                                           alignItems: "center",
+                                           justifyContent: "center",
+                                           height: "100%",
+                                           fontSize: "2em"}}>
+                              No results found
+                              </div>);
         } else {
             videoAndSlider = (
                     <div style={{height: "100%", width: "100%"}}>
 
                     <Player videoId={this.state.videoId}/>
 
-                    <Slider
-                focusQ={this.focusQ}
-                playVideo={this.playVideo}
-                ref="slider"
-                videoN={this.state.videoN}
-                videos={this.state.videos}/>
+                    <Slider focusQ={this.focusQ} playVideo={this.playVideo} ref="slider"
+                videoN={this.state.videoN} videos={this.state.videos}/>
                     </div>);
         }
-
-        let inputStyle = {
-            boxSizing: "border-box",
-            width: "100%",
-            height: "100%",
-            fontSize: "2em",
-            textAlign: "center"
-        };
 
         return (
                 <div id="container" style={{height: "100%"}}>
 
-                <form
-            onSubmit={this.handleSubmit}
-            style={{height: "10%"}}
-                >
-                <input
-            autoComplete="off"
-            autoFocus
-            id="q"
-            onChange={this.onChange}
-            onKeyDown={this.onKeyDown}
-            placeholder="search"
-            ref="q"
-            style={inputStyle}
-            value={this.state.q}
-                />
+                <form onSubmit={this.handleSubmit} style={{height: "10%"}}>
+                <input autoComplete="off" autoFocus id="q" onChange={this.onChange}
+            onKeyDown={this.onKeyDown} placeholder="search" ref="q"
+            style={{boxSizing: "border-box",
+                    width: "100%",
+                    height: "100%",
+                    fontSize: "2em",
+                    textAlign: "center"}}
+            value={this.state.q}/>
                 </form>
 
-                <div style={{height: "90%"}}>
-                {{videoAndSlider}}
-            </div>
+                <div style={{height: "90%"}}> {{videoAndSlider}} </div>
 
                 </div>
         );
