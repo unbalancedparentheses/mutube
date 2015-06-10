@@ -14470,6 +14470,8 @@ System.register("build/mutube", ["npm:babel-runtime@5.4.7/core-js/object/create"
                 } });
 
             _Object$defineProperty(MuTube.prototype, "searchYoutube", { writable: true, configurable: true, value: function value() {
+                    this.setState({ searching: true });
+
                     Youtube.search(this.state.q).then((function (videos) {
                         if (videos.length < 5) {
                             this.setState({
