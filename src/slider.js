@@ -3,7 +3,6 @@
 import React from "react";
 
 class Slider extends React.Component{
-
     constructor (props) {
         super(props);
 
@@ -89,7 +88,7 @@ class Slider extends React.Component{
         let styles = [];
         let i;
 
-        for (i = firstVideo; i < firstVideo + numberOfVideos; i++) {
+        for (i = firstVideo; (i < firstVideo + numberOfVideos) && (i < this.props.videos.length); i++) {
             let thumb;
 
             if (this.props.videos[0]) {
