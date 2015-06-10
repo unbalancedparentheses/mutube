@@ -81,20 +81,18 @@ class Slider extends React.Component{
             numberOfVideos = 5;
         }
 
-        let videoN = this.props.videoN;
-
-        let firstVideo = numberOfVideos * Math.floor(videoN / numberOfVideos);
+        let firstVideo = numberOfVideos * Math.floor(this.props.videoN / numberOfVideos);
 
         let styles = [];
         let i;
 
-        for (i = firstVideo; (i < firstVideo + numberOfVideos) && (i < this.props.videos.length); i++) {
+        for (i = firstVideo; (i < firstVideo + numberOfVideos); i++) {
             let thumb;
 
-            if (this.props.videos[0]) {
+            if ( i < this.props.videos.length) {
                 thumb = this.props.videos[i].thumb;
             } else {
-                thumb = "";
+                thumb = this.props.videos[i - this.props.videos.length].thumb;
             }
 
             let style = {
@@ -105,7 +103,7 @@ class Slider extends React.Component{
                 float: "left"
             };
 
-            if (i === videoN) {
+            if (i === this.props.videoN) {
                 style.boxShadow = "inset 0px 0px 0px 5px #f00";
             } else {
                 style.WebkitFilter = "grayscale(100%)";
